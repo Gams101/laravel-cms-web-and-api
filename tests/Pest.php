@@ -1,5 +1,8 @@
 <?php
+
+use App\Models\User;
 use Illuminate\Foundation\Testing\TestCase;
+use Laravel\Sanctum\Sanctum;
 use Tests\CreatesApplication;
 
 /*
@@ -48,4 +51,9 @@ expect()->extend('toBeOne', function () {
 function something()
 {
     // ..
+}
+
+function loginAsUser()
+{
+    Sanctum::actingAs(User::factory()->create());
 }
