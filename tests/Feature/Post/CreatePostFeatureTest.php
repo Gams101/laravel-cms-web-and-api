@@ -6,10 +6,9 @@ use function Pest\Laravel\postJson;
 
 it('can create a post via api', function () {
 
-    loginAsUser();
-
     $payload = Post::newFactory()->raw();
 
+    loginAsUser();
     $response = postJson('api/posts', $payload);
 
     $response

@@ -27,7 +27,8 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::post('logout', [AuthController::class, 'logout']);
 
     Route::prefix('posts')->group(function() {
-        Route::post('list', [PostController::class, 'list']);
+        Route::get('list', [PostController::class, 'list']);
+        Route::patch('{id}', [PostController::class, 'update']);
         Route::post('', [PostController::class, 'store']);
     });
 });

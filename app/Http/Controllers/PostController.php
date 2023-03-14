@@ -5,8 +5,14 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PostRequestForm;
 use Domain\Post\Actions\CreatePostAction;
 use Domain\Post\Actions\ListPostAction;
+use Domain\Post\Actions\UpdatePostAction;
+use Domain\Post\Post;
 use Domain\Post\PostRequestData;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+
+use Symfony\Component\HttpFoundation\Response as HttpResponse;
+
 use Illuminate\Support\Facades\Response;
 
 class PostController extends Controller
@@ -19,6 +25,29 @@ class PostController extends Controller
         $action = app(ListPostAction::class);
 
         $result = $action->execute($paginate);
+
+        return Response::json($result);
+    }
+
+    public function update(int $id, PostRequestForm $request)
+    {
+        try {
+            /** @var Post */
+            $post = Post::findOrFail($id);
+
+            $data = PostRequestData::fromRequest($request);
+
+            /** @var UpdatePostAction */
+            $action = app(UpdatePostAction::class);
+
+            $result = $action->execute($post, $data);
+
+        } catch (ModelNotFoundException $e) {
+            return Response::json(
+                ['message' => $e->getMessage()],
+                HttpResponse::HTTP_UNPROCESSABLE_ENTITY
+            );
+        }
 
         return Response::json($result);
     }
