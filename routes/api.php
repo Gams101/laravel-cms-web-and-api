@@ -36,6 +36,7 @@ Route::middleware('auth:sanctum')->group(function() {
 
     Route::prefix('pages')->group(function() {
         Route::get('list', [PageController::class, 'list']);
+        Route::patch('{id}', [PageController::class, 'update']);
         Route::delete('{id}', [PageController::class, 'destroy']);
         Route::post('', [PageController::class, 'store']);
     });
