@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\PostController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -31,5 +32,9 @@ Route::middleware('auth:sanctum')->group(function() {
         Route::patch('{id}', [PostController::class, 'update']);
         Route::delete('{id}', [PostController::class, 'destroy']);
         Route::post('', [PostController::class, 'store']);
+    });
+
+    Route::prefix('pages')->group(function() {
+        Route::post('', [PageController::class, 'store']);
     });
 });
