@@ -1,8 +1,8 @@
 <?php
 
 use Domain\Page\Actions\CreatePageAction;
-use Domain\Page\DTO\PageRequestData;
 use Domain\Page\Page;
+use Domain\Page\PageRequestData;
 
 it('can create a page via action class', function() {
 
@@ -17,10 +17,11 @@ it('can create a page via action class', function() {
         parent_id: $factory->parent_id,
     );
 
-    $action = new CreatePageAction();
+    /** @var CreatePageAction */
+    $action = app(CreatePageAction::class);
 
-    $page = $action->execute($data);
+    $result = $action->execute($data);
 
-    expect($page)->toBeInstanceOf(Page::class);
-    expect($page->title)->toEqual($data->title);
+    expect($result)->toBeInstanceOf(Page::class);
+    expect($result->title)->toEqual($data->title);
 });

@@ -1,8 +1,8 @@
 <?php
 
 use Domain\Page\Actions\UpdatePageAction;
-use Domain\Page\DTO\PageRequestData;
 use Domain\Page\Page;
+use Domain\Page\PageRequestData;
 
 it('can update a page via action class', function() {
     /** @var Page $factory */
@@ -16,10 +16,11 @@ it('can update a page via action class', function() {
         parent_id: $factory->parent_id,
     );
 
-    $action = new UpdatePageAction();
+    /** @var UpdatePageAction */
+    $action = app(UpdatePageAction::class);
 
-    $page = $action->execute($factory, $data);
+    $result = $action->execute($factory, $data);
 
-    expect($page)->toBeInstanceOf(Page::class);
-    expect($page->title, $data->title);
+    expect($result)->toBeInstanceOf(Page::class);
+    expect($result->title, $data->title);
 });

@@ -1,15 +1,15 @@
 <?php
 
-namespace Domain\Page\Actions;
+namespace Domain\Post\Actions;
 
-use Domain\Page\Page;
-use Domain\Page\PageRequestData;
+use Domain\Post\Post;
+use Domain\Post\PostRequestData;
 
-class CreatePageAction
+class CreatePostAction
 {
-    public function execute(PageRequestData $data): Page
+    public function execute(PostRequestData $data)
     {
-        $page = Page::create([
+        $post = Post::create([
             'title' => $data->title,
             'slug' => $data->slug,
             'publish_date' => $data->publish_date,
@@ -17,6 +17,6 @@ class CreatePageAction
             'parent_id' => $data->parent_id,
         ]);
 
-        return $page;
+        return $post;
     }
 }

@@ -2,8 +2,8 @@
 
 namespace Domain\Page\Actions;
 
-use Domain\Page\DTO\PageRequestData;
 use Domain\Page\Page;
+use Domain\Page\PageRequestData;
 
 class UpdatePageAction
 {

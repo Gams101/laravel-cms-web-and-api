@@ -1,14 +1,14 @@
 <?php
 
-use Domain\Page\Actions\ListPageAction;
-use Domain\Page\Page;
+use Domain\Post\Actions\ListPostAction;
+use Domain\Post\Post;
 use Illuminate\Pagination\LengthAwarePaginator;
 
-it('can list page without paginate value via action class', function() {
-    Page::newFactory()->count(5)->create();
+it('can list post without paginate value via action class', function() {
+    Post::newFactory()->count(5)->create();
 
-    /** @var ListPageAction */
-    $action = app(ListPageAction::class);
+    /** @var ListPostAction */
+    $action = app(ListPostAction::class);
 
     /** @var LengthAwarePaginator */
     $list = $action->execute();
@@ -18,11 +18,11 @@ it('can list page without paginate value via action class', function() {
     expect($list->items())->toHaveCount(5);
 });
 
-it('can list page with paginate value via action class', function() {
-    Page::newFactory()->count(5)->create();
+it('can list post with paginate value via action class', function() {
+    Post::newFactory()->count(5)->create();
 
-    /** @var ListPageAction */
-    $action = app(ListPageAction::class);
+    /** @var ListPostAction */
+    $action = app(ListPostAction::class);
 
     $paginate = 3;
 

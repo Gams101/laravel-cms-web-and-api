@@ -1,10 +1,10 @@
 <?php
 
-namespace Domain\Page\DTO;
+namespace Domain\Post;
 
 use DateTime;
 
-class PageRequestData
+class PostRequestData
 {
     public function __construct(
 		public string $title,
