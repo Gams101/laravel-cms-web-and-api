@@ -35,6 +35,7 @@ Route::middleware('auth:sanctum')->group(function() {
     });
 
     Route::prefix('pages')->group(function() {
+        Route::get('list', [PageController::class, 'list']);
         Route::post('', [PageController::class, 'store']);
     });
 });
