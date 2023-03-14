@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PostRequestForm;
 use Domain\Post\Actions\CreatePostAction;
+use Domain\Post\Actions\DeletePostAction;
 use Domain\Post\Actions\ListPostAction;
 use Domain\Post\Actions\UpdatePostAction;
 use Domain\Post\Post;
@@ -41,6 +42,27 @@ class PostController extends Controller
             $action = app(UpdatePostAction::class);
 
             $result = $action->execute($post, $data);
+
+        } catch (ModelNotFoundException $e) {
+            return Response::json(
+                ['message' => $e->getMessage()],
+                HttpResponse::HTTP_UNPROCESSABLE_ENTITY
+            );
+        }
+
+        return Response::json($result);
+    }
+
+    public function destroy(int $id)
+    {
+        try {
+            /** @var Post */
+            $post = Post::findOrFail($id);
+
+            /** @var DeletePostAction */
+            $action = app(DeletePostAction::class);
+
+            $result = $action->execute($post);
 
         } catch (ModelNotFoundException $e) {
             return Response::json(

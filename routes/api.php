@@ -29,6 +29,7 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::prefix('posts')->group(function() {
         Route::get('list', [PostController::class, 'list']);
         Route::patch('{id}', [PostController::class, 'update']);
+        Route::delete('{id}', [PostController::class, 'destroy']);
         Route::post('', [PostController::class, 'store']);
     });
 });
