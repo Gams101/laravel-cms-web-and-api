@@ -4,10 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PageRequestForm;
 use Domain\Page\Actions\CreatePageAction;
+use Domain\Page\Actions\DeletePageAction;
 use Domain\Page\Actions\ListPageAction;
+use Domain\Page\Page;
 use Domain\Page\PageRequestData;
+use Domain\Post\Post;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
+
+use Symfony\Component\HttpFoundation\Response as HttpResponse;
 
 class PageController extends Controller
 {
@@ -19,6 +25,27 @@ class PageController extends Controller
         $action = app(ListPageAction::class);
 
         $result = $action->execute($paginate);
+
+        return Response::json($result);
+    }
+
+    public function destroy(int $id)
+    {
+        try {
+            /** @var Page */
+            $model = Page::findOrFail($id);
+
+            /** @var DeletePageAction */
+            $action = app(DeletePageAction::class);
+
+            $result = $action->execute($model);
+
+        } catch (ModelNotFoundException $e) {
+            return Response::json(
+                ['message' => $e->getMessage()],
+                HttpResponse::HTTP_UNPROCESSABLE_ENTITY
+            );
+        }
 
         return Response::json($result);
     }

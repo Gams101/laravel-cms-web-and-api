@@ -34,14 +34,14 @@ class PostController extends Controller
     {
         try {
             /** @var Post */
-            $post = Post::findOrFail($id);
+            $model = Post::findOrFail($id);
 
             $data = PostRequestData::fromRequest($request);
 
             /** @var UpdatePostAction */
             $action = app(UpdatePostAction::class);
 
-            $result = $action->execute($post, $data);
+            $result = $action->execute($model, $data);
 
         } catch (ModelNotFoundException $e) {
             return Response::json(
@@ -57,12 +57,12 @@ class PostController extends Controller
     {
         try {
             /** @var Post */
-            $post = Post::findOrFail($id);
+            $model = Post::findOrFail($id);
 
             /** @var DeletePostAction */
             $action = app(DeletePostAction::class);
 
-            $result = $action->execute($post);
+            $result = $action->execute($model);
 
         } catch (ModelNotFoundException $e) {
             return Response::json(
