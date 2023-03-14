@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('slug');
             $table->enum('status', ['draft', 'published', 'future']);
             $table->date('publish_date');
-            $table->unsignedBigInteger('parent_id')->nullable();
             $table->timestamps();
         });
     }

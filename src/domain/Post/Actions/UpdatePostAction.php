@@ -11,10 +11,8 @@ class UpdatePostAction
     {
         $post->title = $data->title;
         $post->title = $data->title;
-        $post->slug = $data->slug;
         $post->publish_date = $data->publish_date;
         $post->status = $data->status;
-        $post->parent_id = $data->parent_id;
 
         $post->save();
 

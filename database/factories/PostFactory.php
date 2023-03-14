@@ -23,9 +23,8 @@ class PostFactory extends Factory
         return [
             'title' => $this->faker->name(),
             'slug' => $this->faker->slug(),
-            'publish_date' => $this->faker->dateTime(),
+            'publish_date' => $this->faker->dateTime()->format('Y-m-d H:i:s'),
             'status' => WebpageStatus::Draft,
-            'parent_id' => null,
         ];
     }
 }

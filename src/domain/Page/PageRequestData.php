@@ -8,9 +8,8 @@ class PageRequestData
 {
     public function __construct(
 		public string $title,
-		public string $slug,
 		public string $status,
-		public string | DateTime $publish_date,
+		public string $publish_date,
 		public ?int $parent_id,
 	) {
 	}

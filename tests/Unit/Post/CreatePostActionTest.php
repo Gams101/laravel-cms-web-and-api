@@ -11,10 +11,8 @@ it('can create a post via action class', function () {
 
     $data = new PostRequestData(
         title: $factory->title,
-        slug: $factory->slug,
         status: $factory->status,
         publish_date: $factory->publish_date,
-        parent_id: $factory->parent_id,
     );
 
     /** @var CreatePostAction */

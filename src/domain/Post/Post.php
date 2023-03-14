@@ -4,9 +4,13 @@ namespace Domain\Post;
 
 use Database\Factories\PostFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
 
 class Post extends Model
 {
+    use HasSlug;
+
     protected static function newFactory(): PostFactory
     {
         return PostFactory::new();
@@ -17,7 +21,16 @@ class Post extends Model
         'slug',
         'status',
         'publish_date',
-        'parent_id',
     ];
+
+    /**
+     * Get the options for generating the slug.
+     */
+    public function getSlugOptions() : SlugOptions
+    {
+        return SlugOptions::create()
+            ->generateSlugsFrom('title')
+            ->saveSlugsTo('slug');
+    }
 
 }
