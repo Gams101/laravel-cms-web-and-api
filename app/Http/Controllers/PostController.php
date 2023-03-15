@@ -38,6 +38,8 @@ class PostController extends Controller
             /** @var Post */
             $model = Post::findOrFail($id);
 
+            $this->authorize('update', $model);
+
             $data = PostRequestData::fromRequest($request);
 
             /** @var UpdatePostAction */

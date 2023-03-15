@@ -11,10 +11,23 @@ it('can update a post via api', function() {
 
     $payload = Post::newFactory()->raw(['title' => 'Updated title']);
 
-    loginAsUser();
+    loginAsAdmin();
     $result = patchJson('api/posts/' . $factory->id, $payload);
 
     $result
         ->assertSuccessful()
         ->assertJsonFragment(['title' => $payload['title']]);
+});
+
+it('should not able to update a post as non-admin', function() {
+
+    /** @var Post */
+    $factory = Post::newFactory()->create();
+
+    $payload = Post::newFactory()->raw(['title' => 'Updated title']);
+
+    loginAsUser();
+    $result = patchJson('api/posts/' . $factory->id, $payload);
+
+    $result->assertForbidden();
 });
