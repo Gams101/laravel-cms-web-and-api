@@ -61,6 +61,8 @@ class PostController extends Controller
             /** @var Post */
             $model = Post::findOrFail($id);
 
+            $this->authorize('delete', $model);
+
             /** @var DeletePostAction */
             $action = app(DeletePostAction::class);
 
