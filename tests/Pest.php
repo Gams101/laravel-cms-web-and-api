@@ -3,6 +3,7 @@
 use App\Models\User;
 use Illuminate\Foundation\Testing\TestCase;
 use Laravel\Sanctum\Sanctum;
+use Spatie\Permission\Models\Role;
 use Tests\CreatesApplication;
 
 /*
@@ -56,4 +57,14 @@ function something()
 function loginAsUser()
 {
     Sanctum::actingAs(User::factory()->create());
+}
+
+function loginAsAdmin()
+{
+    $adminRole = Role::create(['name' => 'admin']);
+
+    $user = User::factory()->create();
+    $user->assignRole($adminRole);
+
+    Sanctum::actingAs($user);
 }

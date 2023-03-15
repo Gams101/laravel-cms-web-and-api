@@ -9,7 +9,6 @@ use Domain\Page\Actions\ListPageAction;
 use Domain\Page\Actions\UpdatePageAction;
 use Domain\Page\Page;
 use Domain\Page\PageRequestData;
-use Domain\Post\Post;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
@@ -18,6 +17,10 @@ use Symfony\Component\HttpFoundation\Response as HttpResponse;
 
 class PageController extends Controller
 {
+    public function __construct() {
+        $this->authorizeResource(Page::class, 'id');
+    }
+
     public function list(Request $request)
     {
         $paginate = $request->query('paginate', 5);
