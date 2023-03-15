@@ -5,13 +5,13 @@ use Domain\Page\Page;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\withoutExceptionHandling;
 
-it('can create a page via api', function () {
+it('can create a page via api as admin', function () {
 
     withoutExceptionHandling();
 
     $payload = Page::newFactory()->raw();
 
-    loginAsAdmin();
+    actAsAdmin();
     $response = postJson('api/pages', $payload);
 
     $response
@@ -23,7 +23,7 @@ it('should not able to create a page as non-admin', function() {
 
     $payload = Page::newFactory()->raw();
 
-    loginAsUser();
+    actAsUser();
     $response = postJson('api/pages', $payload);
 
     $response->assertForbidden();

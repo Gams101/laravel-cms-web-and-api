@@ -4,12 +4,12 @@ use Domain\Post\Post;
 
 use function Pest\Laravel\deleteJson;
 
-it('can delete a post via api', function() {
+it('can delete a post via api as admin', function() {
 
     /** @var Post */
     $factory = Post::newFactory()->create();
 
-    loginAsAdmin();
+    actAsAdmin();
     $result = deleteJson('api/posts/' . $factory->id);
 
     $result
@@ -22,7 +22,7 @@ it('should not able to delete a post as non-admin', function() {
     /** @var Post */
     $factory = Post::newFactory()->create();
 
-    loginAsUser();
+    actAsUser();
     $result = deleteJson('api/posts/' . $factory->id);
 
     $result->assertForbidden();

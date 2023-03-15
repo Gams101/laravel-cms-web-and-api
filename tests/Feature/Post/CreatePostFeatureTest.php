@@ -4,11 +4,11 @@ use Domain\Post\Post;
 
 use function Pest\Laravel\postJson;
 
-it('can create a post via api', function () {
+it('can create a post via api as admin', function () {
 
     $payload = Post::newFactory()->raw();
 
-    loginAsAdmin();
+    actAsAdmin();
     $response = postJson('api/posts', $payload);
 
     $response
@@ -20,7 +20,7 @@ it('should not able to create a post as non-admin', function () {
 
     $payload = Post::newFactory()->raw();
 
-    loginAsUser();
+    actAsUser();
     $response = postJson('api/posts', $payload);
 
     $response->assertForbidden();

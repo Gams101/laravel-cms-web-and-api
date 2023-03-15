@@ -54,12 +54,12 @@ function something()
     // ..
 }
 
-function loginAsUser()
+function actAsUser()
 {
     Sanctum::actingAs(User::factory()->create());
 }
 
-function loginAsAdmin()
+function actAsAdmin()
 {
     $adminRole = Role::create(['name' => 'admin']);
 

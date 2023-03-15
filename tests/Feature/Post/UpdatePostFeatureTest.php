@@ -4,14 +4,14 @@ use Domain\Post\Post;
 
 use function Pest\Laravel\patchJson;
 
-it('can update a post via api', function() {
+it('can update a post via api as admin', function() {
 
     /** @var Post */
     $factory = Post::newFactory()->create();
 
     $payload = Post::newFactory()->raw(['title' => 'Updated title']);
 
-    loginAsAdmin();
+    actAsAdmin();
     $result = patchJson('api/posts/' . $factory->id, $payload);
 
     $result
@@ -26,7 +26,7 @@ it('should not able to update a post as non-admin', function() {
 
     $payload = Post::newFactory()->raw(['title' => 'Updated title']);
 
-    loginAsUser();
+    actAsUser();
     $result = patchJson('api/posts/' . $factory->id, $payload);
 
     $result->assertForbidden();
