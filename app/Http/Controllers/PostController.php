@@ -20,6 +20,8 @@ class PostController extends Controller
 {
     public function list(Request $request)
     {
+        $this->authorize('viewAny', Post::class);
+
         $paginate = $request->query('paginate', 5);
 
         /** @var ListPostAction */
