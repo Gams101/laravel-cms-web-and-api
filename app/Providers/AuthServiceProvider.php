@@ -5,7 +5,9 @@ namespace App\Providers;
 // use Illuminate\Support\Facades\Gate;
 
 use App\Policies\PagePolicy;
+use App\Policies\PostPolicy;
 use Domain\Page\Page;
+use Domain\Post\Post;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -18,6 +20,7 @@ class AuthServiceProvider extends ServiceProvider
     protected $policies = [
         // 'App\Models\Model' => 'App\Policies\ModelPolicy',
         Page::class => PagePolicy::class,
+        Post::class => PostPolicy::class,
     ];
 
     /**

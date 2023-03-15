@@ -76,6 +76,8 @@ class PostController extends Controller
 
     public function store(PostRequestForm $request)
     {
+        $this->authorize('create', Post::class);
+
         $data = PostRequestData::fromRequest($request);
 
         /** @var CreatePostAction */

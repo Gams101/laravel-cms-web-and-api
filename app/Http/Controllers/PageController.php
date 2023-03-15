@@ -62,6 +62,8 @@ class PageController extends Controller
             /** @var Page */
             $model = Page::findOrFail($id);
 
+            $this->authorize('delete', $model);
+
             /** @var DeletePageAction */
             $action = app(DeletePageAction::class);
 
