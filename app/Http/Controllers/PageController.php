@@ -17,10 +17,6 @@ use Symfony\Component\HttpFoundation\Response as HttpResponse;
 
 class PageController extends Controller
 {
-    public function __construct() {
-        $this->authorizeResource(Page::class, 'id');
-    }
-
     public function list(Request $request)
     {
         $paginate = $request->query('paginate', 5);
@@ -38,6 +34,8 @@ class PageController extends Controller
         try {
             /** @var Page */
             $model = Page::findOrFail($id);
+
+            $this->authorize('update', $model);
 
             $data = PageRequestData::fromRequest($request);
 
@@ -79,6 +77,8 @@ class PageController extends Controller
 
     public function store(PageRequestForm $request)
     {
+        $this->authorize('create', Page::class);
+
         $data = PageRequestData::fromRequest($request);
 
         /** @var CreatePageAction */

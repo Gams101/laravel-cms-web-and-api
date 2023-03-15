@@ -19,13 +19,12 @@ it('can create a page via api', function () {
         ->assertJsonFragment(['title' => $payload['title']]);
 });
 
-it('should not create a page as non-admin user', function() {
+it('should not able to create a page as non-admin user', function() {
 
     $payload = Page::newFactory()->raw();
 
     loginAsUser();
     $response = postJson('api/pages', $payload);
 
-    $response
-        ->assertForbidden();
+    $response->assertForbidden();
 });
