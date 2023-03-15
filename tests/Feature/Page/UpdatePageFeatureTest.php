@@ -19,7 +19,7 @@ it('can update a page via api', function() {
         ->assertJsonFragment(['title' => $payload['title']]);
 });
 
-it('should not able to update a page as non-admin user', function() {
+it('should not able to update a page as non-admin', function() {
 
     /** @var Page */
     $factory = Page::newFactory()->create();

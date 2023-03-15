@@ -19,6 +19,8 @@ class PageController extends Controller
 {
     public function list(Request $request)
     {
+        $this->authorize('viewAny', Page::class);
+
         $paginate = $request->query('paginate', 5);
 
         /** @var ListPageAction */

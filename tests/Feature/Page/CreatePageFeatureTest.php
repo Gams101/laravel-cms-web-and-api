@@ -19,7 +19,7 @@ it('can create a page via api', function () {
         ->assertJsonFragment(['title' => $payload['title']]);
 });
 
-it('should not able to create a page as non-admin user', function() {
+it('should not able to create a page as non-admin', function() {
 
     $payload = Page::newFactory()->raw();
 
